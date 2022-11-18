@@ -1,0 +1,8 @@
+{
+	"mpop.revii.launcher": {
+		"ver": "AlphaLite 0.2",
+		"desc": "A new update has come and changed.\n\n1. Changed web domain for updates\n2. Fixed minor issue about onLaunch of the application.\n3. Added on application download (but still in development.",
+		"url": "https://github.com/RyannKim327/Launcher-App/raw/main/release.apk",
+		"req": true
+	}
+}

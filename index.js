@@ -4,24 +4,32 @@ const parser = require("body-parser")
 const app = express()
 const enc = parser.urlencoded({extended: false})
 
+app.use(express.static("public"))
 app.get("/", (req, res) => {
-	res.send("This is a landing page...")
+	res.send("Please update our apps, for you to make updated.")
 })
-
-app.post("/feed", enc, (req, res) => {
-	let json = JSON.parse(fs.readFileSync("data.json", "utf8"))
-	let data = {
-		feed: req.body.error,
-		toRead: true
+app.post("/updates", enc, (req, res) => {
+	let data = req.body.package
+	if(data == undefined){
+		res.end("Something went wrong.")
+	}else{
+		let js_ = JSON.parse(fs.readFileSync("a.json", "utf8"))
+		let json = js_[data]
+		if(json != undefined){
+			let f = {
+				"version": json.ver,
+				"link": json.url,
+				"description": json.desc,
+				"isRequired": json.req
+			}
+		res.end(JSON.stringify(f))
+		}else{
+			res.end("Not found")
+		}
 	}
-	json.data.push(data)
-	fs.writeFileSync("data.json", JSON.strigify(json), "utf8")
-	res.end("Feedback sent")
 })
-
 app.listen(3000, () => {
-	console.log("Server activated.")
+	console.log("Listening to default port")
 })
 
-
-
+module.exports = app
